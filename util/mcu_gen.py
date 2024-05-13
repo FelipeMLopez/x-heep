@@ -322,7 +322,7 @@ def main():
     # Parse arguments.
 
     parser.add_argument("--cpu",
-                        metavar="cv32e20,cv32e40p,cv32e40x,cv32e40px",
+                        metavar="cv32e20,cv32e40p,cv32e41p,cv32e40s,cv32e40x,cv32e40px",
                         nargs='?',
                         default="",
                         help="CPU type (default value from cfg file)")

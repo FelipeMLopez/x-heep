@@ -12,6 +12,8 @@ filesets:
     depend:
     - x-heep::packages
     - openhwgroup.org:ip:cv32e40p
+    - openhwgroup.org:ip:cv32e41p
+    - openhwgroup.org:ip:cv32e40s
     - openhwgroup.org:ip:cv32e40x
     - openhwgroup:cve2:cve2_top
     - esl_epfl:ip:cv32e40px

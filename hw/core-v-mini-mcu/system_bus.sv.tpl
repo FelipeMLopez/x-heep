@@ -194,9 +194,15 @@ module system_bus
 `ifndef SYNTHESIS
   always_ff @(posedge clk_i, negedge rst_ni) begin : check_out_of_bound
     if (rst_ni) begin
+      // $display("Request %d", error_slave_req.req);
+      // $display("We %d", error_slave_req.we);
+      // $display("Be: 0x%02x", error_slave_req.be);
+      // $display("Wdata: 0x%08x", error_slave_req.wdata);
       if (error_slave_req.req) begin
         $display("%t Out of bound memory access 0x%08x", $time, error_slave_req.addr);
         $stop;
+      // end else begin
+      //   $display("Address 0x%08x", error_slave_req.addr);
       end
     end
   end

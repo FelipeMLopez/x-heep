@@ -1,0 +1,27 @@
+// Copyright 2022 OpenHW Group
+// Solderpad Hardware License, Version 2.1, see LICENSE.md for details.
+// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+
+`verilator_config
+// rtl/cv32e40s_cs_registers.sv
+lint_off -rule WIDTH -file "*/rtl/cv32e40s_cs_registers.sv" -match "Operator SHIFTL expects 32 bits on the LHS, but LHS's VARREF 'MHPMCOUNTERS_MASK' generates 29 bits."
+lint_off -rule WIDTH -file "*/rtl/cv32e40s_cs_registers.sv" -match "Operator OR expects 32 bits on the RHS, but RHS's CONST '3'h5' generates 3 bits."
+// rtl/cv32e40s_debug_triggers
+lint_off -rule WIDTH -file "*/rtl/cv32e40s_debug_triggers.sv" -match "Operator SHIFTL expects 32 bits on the LHS, but LHS's VARREF 'USER' generates 1 bits."
+lint_off -rule DECLFILENAME -file "*/bhv/cv32e40s_sim_clock_gate.sv" -match "Filename 'cv32e40s_sim_clock_gate' does not match MODULE name: 'cv32e40s_clock_gate'"
+lint_off -rule VARHIDDEN -file "*/rtl/cv32e40s_cs_registers.sv" -match "Declaration of signal hides declaration in upper scope*"
+lint_off -rule DECLFILENAME -file "*/bhv/cv32e40s_sim_sffr.sv" -match "Filename 'cv32e40s_sim_sffr' does not match MODULE name: 'cv32e40s_sffr'"
+lint_off -rule DECLFILENAME -file "*/bhv/cv32e40s_sim_sffs.sv" -match "Filename 'cv32e40s_sim_sffs' does not match MODULE name: 'cv32e40s_sffs'"
+lint_off -rule UNUSED -file "*/openhwgroup_cv32e40s/*" -match "*"
+lint_off -rule LITENDIAN -file "*/openhwgroup_cv32e40s/*" -match "Little bit endian vector*"
+lint_off -rule IMPLICIT -file "*/openhwgroup_cv32e40s/*" -match "Signal definition not found*"
+lint_off -rule BLKANDNBLK -file "*/openhwgroup_cv32e40s/*" -match "Unsupported: Blocked and non-blocking assignments to same variable: *"
+lint_off -rule UNUSED -file "*" -match "Bits of signal are not used*"
+lint_off -rule UNUSED -file "*" -match "Signal is not used*"
+lint_off -rule UNDRIVEN -file "*" -match "Bits of signal are not driven*"
+lint_off -rule UNDRIVEN -file "*" -match "Signal is not driven*"
+lint_off -rule MULTIDRIVEN -file "*/rtl/cv32e40s_cs_registers.sv" -match "Signal has multiple driving blocks with different clocking: '*'*"
+lint_off -rule WIDTH -file "*/rtl/cv32e40s_cs_registers.sv" -match "Operator SHIFTL expects 32 bits on the LHS, but LHS's VARREF 'MHPMCOUNTERS_MASK' generates 29 bits."
+lint_off -rule WIDTH -file "*/rtl/cv32e40s_cs_registers.sv" -match "Operator SHIFTL expects 32 bits on the LHS, but LHS's VARREF 'USER' generates 1 bits."
+lint_off -rule WIDTH -file "*/rtl/cv32e40s_cs_registers.sv" -match "Operator OR expects 32 bits on the RHS, but RHS's CONST '3'h5' generates 3 bits."
+lint_off -rule WIDTH -file "*" -match "Operator*"
