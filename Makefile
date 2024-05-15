@@ -220,6 +220,18 @@ run-app-verilator: app
 	cat uart0.log; \
 	cd ../../..;
 
+run-app:
+	$(MAKE) app ARCH=$(ARCH) PROJECT=$(PROJECT)
+	cd ./build/openhwgroup.org_systems_core-v-mini-mcu_0/sim-verilator; \
+	./Vtestharness +firmware=../../../sw/build/main.hex; \
+	cat uart0.log; \
+	cd ../../..;
+
+run-complete: clean-all
+	$(MAKE) mcu-gen CPU=$(CPU) BUS=$(BUS) MEMORY_BANKS=$(MEMORY_BANKS) MEMORY_BANKS_IL=$(MEMORY_BANKS_IL)
+	$(MAKE) verilator-sim FUSESOC_FLAGS=$(FUSESOC_FLAGS) FUSESOC_PARAM=$(FUSESOC_PARAM)
+	$(MAKE) run-app ARCH=$(ARCH) PROJECT=$(PROJECT)
+
 ## Simulate all the apps present in the repo
 app-simulate-all:
 	bash util/test_all.sh $(LINKER) $(COMPILER) $(TIMEOUT) $(SIMULATOR)

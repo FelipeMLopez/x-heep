@@ -190,6 +190,30 @@ for arg in "$@"
 do
 	case $arg in
 
+		cv32e20)
+			CPU=cv32e20
+			;;
+
+		cv32e40p)
+			CPU=cv32e40p
+			;;
+		
+		cv32e40x)
+			CPU=cv32e40x
+			;;
+
+		cv32e40s)
+			CPU=cv32e40s
+			;;
+
+		cv32e41p)
+			CPU=cv32e41p
+			;;
+		
+		cv32e40px)
+			CPU=cv32e40px
+			;;
+
 		verilator | VERILATOR)
 			SIMULATOR='verilator'
 			;;
@@ -243,8 +267,12 @@ do
 
 		*)
 			re='^[0-9]+$'
+            re_arch='^rv32i.*'
+            echo $arg
 			if [[ $arg =~ $re ]] ; then
 				SIM_TIMEOUT_S=$arg
+            elif [[ $arg =~ $re_arch ]] ; then
+                ARCH=$arg
 			else
 				echo -e "${RED}$arg is not a valid argument${RESET}"
 			fi
@@ -258,6 +286,14 @@ done
 #############################################################
 #			SET DEFAULT VALUES IF NON WERE SUPPLIED
 #############################################################
+
+if [ -z "$CPU" ]; then
+	CPU+=cv32e20
+fi
+
+if [ -z "$ARCH" ]; then
+	ARCH+=rv32imc
+fi
 
 if [ -z "$COMPILERS" ]; then
 	COMPILERS+="gcc"
@@ -294,8 +330,10 @@ fi
 echo -e ${LONG_W}
 
 echo -e "${WHITE}Will build using:${RESET}"
-echo "${COMPILERS[@]}"
-echo "${LINKERS[@]}"
+echo "CPU: ${CPU}"
+echo "ARCH: ${ARCH}"
+echo "COMPILERS: ${COMPILERS[@]}"
+echo "LINKERS: ${LINKERS[@]}"
 
 echo -e ${LONG_W}
 
@@ -338,7 +376,7 @@ sed 's/is_included: "no",/is_included: "yes",/' -i mcu_cfg.hjson
 
 if [ $DEBUG -eq 0 ];	 then
 	# The MCU is generated with several memory banks to avoid example code not fitting.
-	make mcu-gen X_HEEP_CFG=configs/testall.hjson EXTERNAL_DOMAINS=1
+	make mcu-gen X_HEEP_CFG=configs/testall.hjson EXTERNAL_DOMAINS=1 CPU=$CPU
 
 	if [ "$SIMULATOR" != "none" ]; then
 	# Make the simualtion model
