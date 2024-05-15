@@ -13,7 +13,7 @@
 
 /* By default, printfs are activated for FPGA and disabled for simulation. */
 #define PRINTF_IN_FPGA  1
-#define PRINTF_IN_SIM   0
+#define PRINTF_IN_SIM   1
 
 #if TARGET_SIM && PRINTF_IN_SIM
         #define PRINTF(fmt, ...)    printf(fmt, ## __VA_ARGS__)
@@ -162,9 +162,9 @@ int main()
 
     PRINTF("program finished with %d errors and %d cycles\n\r", errors, cycles);
 
-#ifdef ENABLE_PRINTF
+// #ifdef ENABLE_PRINTF
     printMatrix(m_c,N,M);
-#endif
+// #endif
 
 
     return errors;
